@@ -8,7 +8,7 @@ import CheckoutPage from "./checkout"
 import CustomerOrdersPage from "./customerOrdersPage"
 import SettingPage from "../components/settingPage"
 import BottomNavbar from "../components/bottomnavbar"
-import LandingPage from "../components/landingPge"
+import LandingPage from "../components/landingPage"
 
 export default function HomePage(){
     return(
