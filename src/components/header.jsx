@@ -19,7 +19,6 @@ export default function Header() {
                 /> 
             </Link> 
 
-            {/* Navigation */}
             <div className="lg:flex items-center hidden  gap-10"> 
                 <Link 
                     className="text-white font-semibold hover:text-[#E7E1B1] transition-colors" 
