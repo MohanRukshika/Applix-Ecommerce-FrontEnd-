@@ -8,6 +8,7 @@ import CheckoutPage from "./checkout"
 import CustomerOrdersPage from "./customerOrdersPage"
 import SettingPage from "../components/settingPage"
 import BottomNavbar from "../components/bottomnavbar"
+import LandingPage from "../components/landingPage"
 
 export default function HomePage(){
     return(
@@ -18,7 +19,7 @@ export default function HomePage(){
             
             <div className="w-full  bg-primary overflow-scroll">
                 <Routes>
-                    <Route path="/" element={<h1>WELCOME TO APPLIX</h1>}/>
+                    <Route path="/" element={<LandingPage/>}/>
                     <Route path="/products" element={<ProductPage/>} />
                     <Route path="/overview/:productId" element={<ProductOverview/>}/>
                     <Route path="/contact" element={<ContactPage/>}/>
