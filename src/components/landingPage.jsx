@@ -1,6 +1,8 @@
 import land from "../assets/land.jpg";
+import {Link} from 'react-router-dom'
 
 export default function LandingPage() {
+
     return (
         <div className="relative w-full h-[calc(100vh-108px)] min-h-[550px] overflow-hidden">
 
@@ -68,7 +70,7 @@ export default function LandingPage() {
                         animation: "gentleFloat 3s ease-in-out infinite"
                     }}
                 >
-                    Explore Now
+                    <Link to="/products">Explore Now</Link>
                 </button>
 
                 {/* Gentle Floating Animation */}

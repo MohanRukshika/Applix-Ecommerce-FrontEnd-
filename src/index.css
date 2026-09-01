@@ -8,7 +8,7 @@
 
 /* Customize the entire scrollbar */
 ::-webkit-scrollbar {
-  width: 8px; /* Set the width of the scrollbar */
+  width: 0px; /* Set the width of the scrollbar */
 }
 
 /* Customize the scrollbar track (background) */
