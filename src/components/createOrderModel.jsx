@@ -3,6 +3,7 @@ import toast from "react-hot-toast"
 import api from "../utils/api"
 
 export default function CreateOrderModel(props) {
+
     const [isModelOpen, setIsModelOpen] = useState(false)
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -13,11 +14,12 @@ export default function CreateOrderModel(props) {
     const [postalCode, setPostalCode] = useState("")
     const [phone, setPhone] = useState("")
 
-    async function createOrder(){
-        try{
+    async function createOrder() {
+        try {
 
             const token = localStorage.getItem("token")
-            const data={
+
+            const data = {
                 firstName,
                 lastName,
                 addressLineOne,
@@ -26,34 +28,40 @@ export default function CreateOrderModel(props) {
                 state,
                 postalCode,
                 phone,
-                items:[]
+                items: []
             }
 
-            for(let i=0;i<cart.length;i++){
+            for (let i = 0; i < cart.length; i++) {
+
                 const item = cart[i]
+
                 data.items.push({
-                    productId:item.product.productId,
-                    quantity:item.quantity
+                    productId: item.product.productId,
+                    quantity: item.quantity
                 })
             }
 
-            await api.post("/orders",data,{
-                headers :{
-                    Authorization : "Bearer "+token
-                } 
+            await api.post("/orders", data, {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
             })
+
             toast.success("Order created successfully")
 
-        }catch(error){
-            console.log("Order creation failed");
-    console.log("Status:", error.response?.status);
-    console.log("Response:", error.response?.data);
-    console.log("Full error:", error);
+        } catch (error) {
+
+            console.log("Order creation failed")
+            console.log("Status:", error.response?.status)
+            console.log("Response:", error.response?.data)
+            console.log("Full error:", error)
+
         }
     }
 
     const cart = props.cart
     const btnname = props.btnname
+
     return (
         <>
             <button
@@ -64,14 +72,17 @@ export default function CreateOrderModel(props) {
             </button>
 
             {isModelOpen && (
-                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-                    <div className="w-[400px] bg-white rounded-xl p-6 shadow-lg">
+
+                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+
+                    <div className="w-full max-w-[400px] bg-white rounded-xl p-5 md:p-6 shadow-lg max-h-[90vh] overflow-y-auto">
 
                         <h2 className="text-2xl font-bold mb-5">
                             Create Order
                         </h2>
 
                         <div className="space-y-3">
+
                             <input
                                 type="text"
                                 placeholder="First Name"
@@ -135,14 +146,33 @@ export default function CreateOrderModel(props) {
                                 onChange={(e) => setPhone(e.target.value)}
                                 className="w-full border p-2 rounded-lg"
                             />
+
                         </div>
 
                         <div className="flex justify-end gap-3 mt-6">
-                            <button type="button" onClick={() => setIsModelOpen(false)} className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100" > Cancel </button>
-                            <button type="button"  onClick={() => {createOrder() }} className="bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90" > Place Order </button>
+
+                            <button
+                                type="button"
+                                onClick={() => setIsModelOpen(false)}
+                                className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    createOrder()
+                                }}
+                                className="bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90"
+                            >
+                                Place Order
+                            </button>
+
                         </div>
 
                     </div>
+
                 </div>
             )}
         </>
