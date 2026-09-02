@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export default function LandingPage() {
 
     return (
-        <div className="relative w-full h-[calc(100vh-108px)] min-h-[550px] overflow-hidden">
+        <div className="relative w-full h-[calc(100vh-108px)] min-h-[600px] overflow-hidden">
 
             {/* Background Image */}
             <img
