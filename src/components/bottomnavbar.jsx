@@ -1,18 +1,54 @@
 import { IoHome } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaCartArrowDown } from "react-icons/fa6";
 import { BsBagHeartFill } from "react-icons/bs";
 
-export default function BottomNavbar(){
-    return(
-        <>
-            <div className="flex items-center justify-between lg:hidden fixed bottom-2 w-[90%] h-[60px] shadow-[inset_0_0px_10px_rgba(0,0,0,0.0)] shadow-secondary/20 rounded-2xl bg-[#fdf9d9] text-2xl p-5 text-secondary">
-                
-                <Link to="/"><IoHome /></Link>
-                <Link to="/products"><BsBagHeartFill /></Link>
-                <Link to="/cart"><FaCartArrowDown /></Link>
-                
-            </div>
-        </>
-    )
+export default function BottomNavbar() {
+    return (
+        <div className="lg:hidden fixed bottom-2 left-1/2 -translate-x-1/2 w-[90%] h-[60px] rounded-2xl bg-[#fdf9d9] text-2xl p-5 text-secondary flex items-center justify-around shadow-lg z-50">
+
+            
+
+            <NavLink
+                to="/products"
+                className={({ isActive }) =>
+                    `p-2 rounded-xl transition-all duration-300 ${
+                        isActive
+                            ? "bg-secondary text-white scale-110"
+                            : "text-secondary"
+                    }`
+                }
+            >
+                <BsBagHeartFill />
+            </NavLink>
+
+            <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                    `p-2 rounded-xl transition-all duration-300 ${
+                        isActive
+                            ? "bg-secondary text-white scale-110"
+                            : "text-secondary"
+                    }`
+                }
+            >
+                <IoHome />
+            </NavLink>
+
+            <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                    `p-2 rounded-xl transition-all duration-300 ${
+                        isActive
+                            ? "bg-secondary text-white scale-110"
+                            : "text-secondary"
+                    }`
+                }
+            >
+                <FaCartArrowDown />
+            </NavLink>
+
+        </div>
+    );
 }
