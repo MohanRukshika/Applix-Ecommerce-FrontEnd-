@@ -37,7 +37,7 @@ export default function ProductOverview(){
 
                 {
                     status === "error" && (
-                        <div className="min-h-screen flex items-center justify-center bg-primary] px-4">
+                        <div className="flex items-center justify-center bg-primary] px-4">
                             <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-lg border border-secondary/10">
                                 <h1 className="mb-3 text-2xl font-bold text-secondary">Failed to load Product</h1>
                                 <p className="mb-6 text-gray-500">Unable to load the product. Please try again.</p>
@@ -47,7 +47,7 @@ export default function ProductOverview(){
                     )
                 }
                 {
-                    status === "success" && <div className="w-full min-h-screen flex flex-col lg:flex-row gap-6 lg:gap-10 px-4 md:px-8 lg:px-10 py-6 lg:py-10">
+                    status === "success" && <div className="w-full flex flex-col lg:flex-row gap-6 lg:gap-10 px-4 md:px-8 lg:px-10 py-6 lg:py-10">
                     <div className="h-[450px] lg:h-[550px] lg:w-1/2 flex justify-center">
                         <ImageSlideShow images={product.image} />
                     </div>
