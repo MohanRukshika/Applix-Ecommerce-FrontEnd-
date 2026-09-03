@@ -44,7 +44,7 @@ export default function ProductPage() {
                     All Products
                 </button>
             </div>
-            <div className="w-full h-full flex justify-center items-center flex-wrap">
+            <div className="w-full h-full flex justify-center items-center flex-wrap mb-6">
                 {products.map((item)=>{
                     return(
                         <ProductCard product={item} key={item.productId}/>
