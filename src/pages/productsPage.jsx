@@ -35,7 +35,7 @@ export default function ProductPage() {
     return (
     <>
         <div className="w-full flex flex-col">
-            <div className="h-[70px] sticky top-0 z-40 bg-primary flex items-center justify-end gap-2 px-4 py-3">
+            <div className="h-[70px] sticky top-0 z-40 bg-primary flex items-center justify-center lg:justify-end gap-2 px-4 py-3">
                 <input value={query} onChange={(e)=>{setQuery(e.target.value)}} type="text" className="border rounded-2xl w-[220px] sm:w-[300px] h-[50px] bg-white border-gray-300 border-2 focus:outline-none text-gray-600 p-3" placeholder="Search products..."/>
                 <button onClick={handleSearch} className="shrink-0">
                     <IoSearchCircleSharp className="text-5xl text-accent"/>
