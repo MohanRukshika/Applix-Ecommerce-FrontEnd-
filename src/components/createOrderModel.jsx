@@ -5,6 +5,8 @@ import api from "../utils/api"
 export default function CreateOrderModel(props) {
 
     const [isModelOpen, setIsModelOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [addressLineOne, setAddressLineOne] = useState("")
@@ -14,8 +16,16 @@ export default function CreateOrderModel(props) {
     const [postalCode, setPostalCode] = useState("")
     const [phone, setPhone] = useState("")
 
+    const cart = props.cart
+    const btnname = props.btnname
+
     async function createOrder() {
+
+        if (isLoading) return
+
         try {
+
+            setIsLoading(true)
 
             const token = localStorage.getItem("token")
 
@@ -49,6 +59,9 @@ export default function CreateOrderModel(props) {
 
             toast.success("Order created successfully")
 
+            // Close modal after successful order
+            setIsModelOpen(false)
+
         } catch (error) {
 
             console.log("Order creation failed")
@@ -56,11 +69,17 @@ export default function CreateOrderModel(props) {
             console.log("Response:", error.response?.data)
             console.log("Full error:", error)
 
+            toast.error(
+                error.response?.data?.message || "Failed to create order"
+            )
+
+        } finally {
+
+            // Stop loading whether request succeeds or fails
+            setIsLoading(false)
+
         }
     }
-
-    const cart = props.cart
-    const btnname = props.btnname
 
     return (
         <>
@@ -88,6 +107,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="First Name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -96,6 +116,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="Last Name"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -104,6 +125,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="Address Line 1"
                                 value={addressLineOne}
                                 onChange={(e) => setAddressLineOne(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -112,6 +134,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="Address Line 2"
                                 value={addressLineTwo}
                                 onChange={(e) => setAddressLineTwo(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -120,6 +143,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="City"
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -128,6 +152,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="State"
                                 value={state}
                                 onChange={(e) => setState(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -136,6 +161,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="Postal Code"
                                 value={postalCode}
                                 onChange={(e) => setPostalCode(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -144,6 +170,7 @@ export default function CreateOrderModel(props) {
                                 placeholder="Phone"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
+                                disabled={isLoading}
                                 className="w-full border p-2 rounded-lg"
                             />
 
@@ -154,19 +181,28 @@ export default function CreateOrderModel(props) {
                             <button
                                 type="button"
                                 onClick={() => setIsModelOpen(false)}
-                                className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100"
+                                disabled={isLoading}
+                                className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 Cancel
                             </button>
 
                             <button
                                 type="button"
-                                onClick={() => {
-                                    createOrder()
-                                }}
-                                className="bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90"
+                                onClick={createOrder}
+                                disabled={isLoading}
+                                className="bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 disabled:opacity-70 disabled:cursor-not-allowed min-w-[120px] flex items-center justify-center gap-2"
                             >
-                                Place Order
+
+                                {isLoading ? (
+                                    <>
+                                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                                        Placing...
+                                    </>
+                                ) : (
+                                    "Place Order"
+                                )}
+
                             </button>
 
                         </div>
